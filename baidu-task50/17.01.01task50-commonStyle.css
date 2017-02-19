@@ -1,0 +1,174 @@
+*{
+    margin: 0;
+    padding: 0;
+    font: 16px/1.5em Microsoft YaHei,Tahoma,Helvetica,Arial,\\5B8B\4F53,sans-serif;
+    color: rgb(85, 85, 85);
+}
+p{
+    font-size: 14px;
+}
+table *{
+    font-size: 16px;
+}
+table.calendar *{
+    font-size: 10px;
+}
+a{
+    list-style: none;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+li{
+    list-style: none;
+}
+button{
+    cursor: pointer;
+}
+button:hover{
+    background: #ee7419;
+    color: white;
+}
+button a{
+    color: rgb(85, 85, 85);
+}
+body{
+    background: #dadada;
+    position: relative;
+    z-index: 1;
+}
+header{
+    height: 50px;
+    background: #ee7419;
+    margin: 0 auto;
+}
+header h1{
+    color: white;
+    float: left;
+    margin-left: 12.5% ;
+    font-size: 18px;
+    line-height: 50px;
+    text-shadow: 0 -.05em .05em rgba(0,0,0,.5);
+
+}
+#first-1h1{
+    padding-left: -16px;
+}
+#first-h1:before{
+    content: "  ?  ";
+    background: white;
+    color: #ee7419;
+    border-radius:9px;
+    width: 18px;
+    height: 18px;
+}
+#second-h1{
+    margin-left: 5%;
+    padding: 0 10px;
+    cursor: pointer;
+
+}
+#second-h1:hover{
+    background: #ee7419 linear-gradient(transparent,hsla(0,0%,100%,.1));
+}
+#second-h1 a{
+    font-size: 18px;
+}
+#container{
+    width: 75%;
+    min-height: 300px;
+    margin: 50px auto;
+    padding: 1em 1em 2.5em;
+    border-radius: .2em;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5);
+    font-size: 16px;
+    background: #fff;
+    position: relative;
+}
+
+
+hr{
+    margin-bottom: 30px;
+}
+#container h1{
+    text-align: center;
+    font-size: 20px;
+    margin: 20px auto;
+    min-height: 1.5em;
+}
+#question-list{
+    width: 90%;
+    min-height: 1px;
+    margin: 0 auto;
+    line-height: 1.5em;
+    padding-bottom:1.5em ;
+}
+#question-list .question-option{
+    padding: .5em;
+}
+#container h1:hover,#question-list .question-option:hover {
+    background: rgb(254, 241, 232);
+}
+#question-list .question-option:hover>h3{
+    font-weight: bold;
+}
+#question-list  p{
+    text-indent: 2em;
+}
+textarea{
+    margin-left: 2em;
+    width: 90%;
+}
+#question-list div p:before{
+    content: "\E600";
+    margin-right: 1em;
+}
+
+
+button{
+    border-radius: .2em;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5);
+    background-color: rgb(255, 255, 255);
+}
+/*弹出层样式*/
+.popup{
+    width: 480px;
+    height: 240px;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    margin-left: -240px;
+    margin-top: -120px;
+    z-index: 2;
+    border: 1px solid rgb(136, 136, 136);
+    background: white;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5);
+}
+.popup h1{
+    background-color: rgb(238, 238, 238);
+    line-height: 2em;
+    font-size: 20px;
+    font-weight: bold;
+    text-indent: 1em;
+}
+
+.close-popup{
+    position: absolute;
+    right: 10px;
+    top: 2px;
+}
+.popup p{
+    text-align: center;
+    line-height: 6em;
+    color: #888;
+    font-size: 16px;
+}
+.popup div{
+    text-align: center;
+    padding: 1em 0 .5em;
+}
+.popup div button{
+    width: 80px;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5) ;
+}
