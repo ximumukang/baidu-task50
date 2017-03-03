@@ -1,0 +1,45 @@
+#return-btn{
+    display: inline-block;
+    width: 100px;
+    position:absolute;
+    left:0;
+    right:0;
+    margin: -10px auto 0;
+}
+.describe{
+    text-align: center;
+}
+.blue,.red,.green,.black,.pink,.orange,.grey,.gold,.white{
+    width: 16px;
+    height: 16px;
+    opacity: 0.35;
+    display: inline-block;
+    margin: 0 1.5em 0 .5em;
+}
+.blue{
+    background-color: blue;
+}
+.red{
+    background-color: red;
+}
+.green{
+    background-color: green;
+}
+.black{
+    background-color: black;
+}
+.pink{
+    background-color: pink;
+}
+.orange{
+    background-color: orange;
+}
+.grey{
+    background-color: grey;
+}
+.gold{
+    background-color: gold;
+}
+.white{
+    background-color: white;
+}

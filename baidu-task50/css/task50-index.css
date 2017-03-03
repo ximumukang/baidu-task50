@@ -1,0 +1,73 @@
+#build{
+    width: 200px;
+    height:45px;
+    background:#ee7419 ;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -22.5px;
+    color: white;
+    font-size: 1.5em;
+    line-height: 45px;
+    border-radius: .1em;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5);
+}
+#build:before{
+    content: "\E600";
+    padding-right: .5em;
+    padding-left: .5em;
+}
+table{
+    width: 90%;
+    padding: 1em;
+    margin: 0 auto;
+    border-spacing: 0;
+}
+table th{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 1em;
+}
+th:hover{
+    background:rgb(254, 241, 232);
+}
+.tr:hover{
+    background:rgb(254, 241, 232);
+}
+button{
+    width: 6em;
+    padding: 3px;
+    margin-left: 1em;
+}
+td{
+    font-size: 18px;
+    text-align: center;
+    padding: .5em;
+    color: grey;
+    border-bottom: 1px solid grey;
+}
+a{
+    color: black;
+}
+a:hover{
+    color: white;
+}
+button a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+}
+.add-btn,.view-data,.build-new{
+    padding: 0;
+}
+.ing{
+    color: lightgreen;
+}
+.been{
+    color:firebrick;
+}
+.saving{
+    color: grey;
+}
