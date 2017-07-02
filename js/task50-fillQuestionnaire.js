@@ -1,18 +1,18 @@
 /**
  * Created by 杭 on 2017/3/3.
  */
-var contents=JSON.parse(localStorage.content);
-var content=contents[localStorage.thatIndex];
-var optionLen=content.question.length;
-$("#creatTitle").text(content.title);
+var submitQues=JSON.parse(localStorage.submitQues),
+    aSubmitQues=submitQues[localStorage.submitIndex],
+    optionLen=aSubmitQues.question.length;
+$("#creatTitle").text(aSubmitQues.title);
 for(var i=0;i<optionLen;i++){
-    var $div=$("<div class='question-option'></div>").addClass(content.type[i]);
-    $div.append($("<h3></h3>").text(content.question[i]));
-    if(content.answers[i].length==0){
+    var $div=$("<div class='question-option'></div>").addClass(aSubmitQues.type[i]);
+    $div.append($("<h3></h3>").text(aSubmitQues.question[i]));
+    if(aSubmitQues.answers[i].length==0){
         $("<textarea rows='3'></textarea>").appendTo($div);
     }
-    for(var f=0;f<content.answers[i].length;f++){
-        $("<p answer='0'></p>").text(content.answers[i][f]).appendTo($div);
+    for(let f=0,len=aSubmitQues.answers[i].length;f<len;f++){
+        $("<p answer='0'></p>").text(aSubmitQues.answers[i][f]).appendTo($div);
     }
     $("#question-list").append($div);
 }
@@ -32,36 +32,15 @@ $(document).on("click",".checkbox-question p",function () {
 });
 
 //点击提交问卷
-/*$("#submit-questionnaire").click(function () {
- var aPeopleData=[];
- for(var i =0;i<optionLen; i++){
- var questionOption=$(".question-option")[i];
- var aOption=[],
- aOptionEle=questionOption.getElementsByTagName("p");
- for(var f=0;f<aOptionEle.length;f++){
- aOption.push(aOptionEle[f].getAttribute("answer"));
- }
- if(aOption.length==0){
- aOption=questionOption.getElementsByTagName("textarea")[0].value;
- }
- aPeopleData.push(aOption);
- }
- content.value.push(aPeopleData);
-
- localStorage.content=JSON.stringify(contents);
-
- $("#submit-questionnaire").unbind();
- });*/
-
-//点击提交问卷
 $("#submit-questionnaire").click(function () {
     popup(getData());
     //$("#submit-questionnaire").unbind();
 });
+
 //弹出框符合要求点击确定后
 $(document).on("click","#confirm-btn",function () {
-    if(content.value.length==0){
-        for(var i =0;i<optionLen; i++){
+    if(aSubmitQues.value.length==0){
+        for(let i =0;i<optionLen; i++){
             var questionOption=$(".question-option")[i];
             var aOption=[],
                 aOptionEle=questionOption.getElementsByTagName("p");
@@ -71,15 +50,15 @@ $(document).on("click","#confirm-btn",function () {
             if(aOption.length==0){
                 aOption.push(questionOption.getElementsByTagName("textarea")[0].value);
             }
-            content.value.push(aOption);
+            aSubmitQues.value.push(aOption);
         }
     }else{
-        for(var i =0 ;i<optionLen; i++){
+        for(let i =0 ;i<optionLen; i++){
             var questionOption=$(".question-option")[i];
-            var aOption=content.value[i],
+            var aOption=aSubmitQues.value[i],
                 aOptionEle=questionOption.getElementsByTagName("p");
             console.log(aOptionEle.length);
-            for(var f=0;f<aOptionEle.length;f++){
+            for(let f=0,len=aOptionEle.length;f<len;f++){
                 aOption[f]=Number(aOption[f])+Number(aOptionEle[f].getAttribute("answer"));
             }
             if(typeof aOption[0] !=="number"){
@@ -87,19 +66,18 @@ $(document).on("click","#confirm-btn",function () {
             }
         }
     }
-
-    localStorage.content=JSON.stringify(contents);
-
-    //$(this).parents("#popup").hide();
+    localStorage.submitQues=JSON.stringify(submitQues);
     window.location.href="17.01.01task50-index.html";
 });
+
 //弹出框点击取消
 $(document).on("click","#cancel-btn",function () {
-    $(this).parents(".popup").hide();
+    $(this).parents(".popup").remove();
 });
 $(document).on("click","#confirm-btn1",function () {
-    $(this).parents(".popup").hide();
+    $(this).parents(".popup").remove();
 });
+
 //获取当前这个人的数据
 function getData(){
     for(var i =0;i<optionLen; i++){

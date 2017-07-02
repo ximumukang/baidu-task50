@@ -20,14 +20,17 @@
 }
 table{
     width: 90%;
-    padding: 1em;
+    padding: .5em;
     margin: 0 auto;
     border-spacing: 0;
 }
+
+
+
 table th{
     font-size: 20px;
     font-weight: bold;
-    padding: 1em;
+    padding: .5em;
 }
 th:hover{
     background:rgb(254, 241, 232);

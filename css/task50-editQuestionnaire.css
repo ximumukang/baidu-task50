@@ -69,6 +69,9 @@ p:hover>.remove-option{
     opacity: 1;
 }
 #question-type{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
     height: 80px;
     width: 90%;
     margin: 0 auto;
@@ -78,20 +81,14 @@ textarea{
     margin-left: 2em;
     width: 90%;
 }
-#question-type div{
-    width: 400px;
-    margin: 0 auto;
-    line-height: 80px;
-}
 #question-type button{
-    width: 100px;
-    margin-right: 25px;
-    padding: 3px 0;
-
+    width:25%;
+    margin-top: 20px;
+    height: 40px;
 }
 #question-type button:before,#question-list div p:before{
     content: "\E600";
-    margin-right: 1em;
+    margin-right: 0.5em;
 }
 #add-question {
     width: 90%;
@@ -106,23 +103,26 @@ textarea{
     margin-right: 5px;
 }
 #my-calender{
+    display: flex;
+    flex-flow: row wrap;
     width: 90%;
     line-height: 1.5em;
     margin:30px auto;
+    justify-content: space-around;
+}
+#date-group {
+    text-align: center;
+}
+#mydatepicker {
+    margin-bottom: 0.5em;
+}
 
-}
-#button-group{
-    width: 300px;
-    float: right;
-}
 #button-group button{
     padding: 4px 10px;
 }
-#date{
-    margin-left: 20%;
-}
+
 .input-edit{
-    width: 90%;
+    width: 50%;
     height: 30px;
     text-align: center;
 }

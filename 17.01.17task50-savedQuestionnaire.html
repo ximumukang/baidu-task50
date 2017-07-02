@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>问卷系统编辑页面</title>
     <link rel="stylesheet" href="./css/17.01.01task50-commonStyle.css">
     <link rel="stylesheet" href="./css/dcalendar.picker.css"/>
     <link rel="stylesheet" href="./css/task50-editQuestionnaire.css">
+
 </head>
 <body>
     <header>
@@ -20,18 +22,16 @@
                 <div id="question-list"></div>
             </div>
             <div id="question-type">
-                <div>
-                    <button id="audio-type">单选</button>
-                    <button id="checkbox-type">多选</button>
-                    <button id="text-type">文本</button>
-                </div>
+                <button id="audio-type">单选</button>
+                <button id="checkbox-type">多选</button>
+                <button id="text-type">文本</button>
             </div>
             <div id="add-question">
                 添加问题
             </div>
             <hr>
             <div id="my-calender">
-                <span id="date">问卷截止日期</span> <input id="mydatepicker" type="text" >&nbsp;
+                <span id="date-group"><label id="date" for="mydatepicker">问卷截止日期</label> &nbsp;<input id="mydatepicker" type="text"name="mydatepicker" ></span>
                 <span id="button-group">
                     <button id="save-question">保存问卷</button>&nbsp;&nbsp;&nbsp;
                     <button id="submit-question">发布问卷</button>
@@ -39,8 +39,8 @@
             </div>
         </div>
     </main>
-    <script src="./js/jquery.js"></script>\
+    <script src="./js/jquery.js"></script>
     <script type="text/javascript" src="./js/dcalendar.picker.js"></script>
-    <script src="./js/task50-editQuestionnaire.js"></script>
+    <script src="./js/task50-savedQuestionnaire.js"></script>
 </body>
 </html>
