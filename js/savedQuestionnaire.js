@@ -1,11 +1,16 @@
 /**
  * Created by 杭 on 2017/3/3.
  */
-//日历插件的使用；
-$('#mydatepicker').dcalendarpicker({
-    format:'yyyy-mm-dd'
-});
 $(function () {
+
+    //日历插件的使用；
+    $('#mydatepicker').datePicker();
+
+    //渲染出保存的问卷
+    var savedQuestionnaire1=JSON.parse(localStorage.savedQuestionnaire);
+    $("#question-list").html((savedQuestionnaire1[Number(localStorage.savedIndex)]).html);
+    $("#mydatepicker").val((savedQuestionnaire1[Number(localStorage.savedIndex)]).date);
+
     $("#question-type").hide();
     $("#add-question").click(function () {
         $("#question-type").slideToggle("fast");
@@ -74,7 +79,7 @@ $(function () {
             return;
         }
 
-        for(let i=0,len=$(".question-option").length;i<len;i++){
+        for(var i=0;i<$(".question-option").length;i++){
             var n=$(".question-option").eq(i).prevAll().length;
             $(".question-option").eq(i).find(".index").text(n+1);
         }
@@ -119,16 +124,9 @@ $(function () {
         $popupDiv.find("#popup-content").text("问卷已保存。");
         $popupDiv.find("#popup-btns").append($("<button id='confirm-btn1'>确定</button>"));
     }
-
     //点击保存问卷
-    if(!localStorage.savedQuestionnaire){
-        var savedQuestionnaire=[];
-    }else {
-        var savedQuestionnaire=JSON.parse(localStorage.savedQuestionnaire);
-    }
-    console.log(savedQuestionnaire);
+    var savedQuestionnaire=JSON.parse(localStorage.savedQuestionnaire);
     var cuursavedQlen=savedQuestionnaire.length;
-    console.log(cuursavedQlen);
     $("#save-question").click(function () {
         popupSave();
         var aSavedQuestionnaire={
@@ -139,12 +137,7 @@ $(function () {
         aSavedQuestionnaire.title=$("#creatTitle").text();
         aSavedQuestionnaire.date=$("#mydatepicker").val();
         aSavedQuestionnaire.html=$("#question-list").html();
-
-        if(savedQuestionnaire.length==cuursavedQlen){
-            savedQuestionnaire.push( aSavedQuestionnaire);
-        }else {
-            savedQuestionnaire.splice(-1,1,aSavedQuestionnaire);
-        }
+        savedQuestionnaire.splice(Number(localStorage.savedIndex),1,aSavedQuestionnaire);
         localStorage.savedQuestionnaire=JSON.stringify(savedQuestionnaire);
     });
     //发布问卷弹出层
@@ -154,7 +147,7 @@ $(function () {
         if($("#mydatepicker").val()==0){
             $popupDiv.find("#popup-content").text("请设置问卷截止日期。");
             $popupDiv.find("#popup-btns").append($("<button id='confirm-btn1'>确定</button>"));
-        }else if($("#question-list").children().size()==0){
+        }else if($("#question-list").children().length==0){
             $popupDiv.find("#popup-content").text("请合理设置问卷内容。");
             $popupDiv.find("#popup-btns").append($("<button id='confirm-btn1'>确定</button>"));
         }else {
@@ -162,28 +155,29 @@ $(function () {
             $popupDiv.find("#popup-btns").append($("<button id='confirm-btn'>确定</button> &nbsp;&nbsp;<button id='cancel-btn'>取消</button>"));
         }
     }
-    //点击发布问卷
+    //点击发布问卷弹出框
     $("#submit-question").click(function () {
         popup();
     });
 
-    //弹出框点击取消
+    //弹出框点击取消、保存弹出框确定；
     $(document).on("click","#cancel-btn",function () {
-        $(this).parents(".popup").remove();
+        $(this).parents(".popup").hide();
     });
     $(document).on("click","#confirm-btn1",function () {
-        $(this).parents(".popup").remove();
+        $(this).parents(".popup").hide();
     });
+
     //发布问卷弹出框点击确定；
     $(document).on("click","#confirm-btn",function () {
         WJLength=$(".question-option").size();
-        for(var i=0;i<WJLength;i++){
+        for(let i=0;i<WJLength;i++){
             var questionOption=$(".question-option")[i];
             WJOption.question.push(questionOption.getElementsByTagName("h3")[0].innerText);
             WJOption.type.push(questionOption.getElementsByTagName("h3")[0].className);
             var aOption=[],
                 aOptionEle=questionOption.getElementsByTagName("p");
-            for(let f=0,len=aOptionEle.length;f<len;f++){
+            for(var f=0;f<aOptionEle.length;f++){
                 if(aOptionEle[f].className=="add-option"){continue;}
                 aOption.push(aOptionEle[f].innerText);
             }
@@ -199,12 +193,11 @@ $(function () {
         }
         submitQues.push(WJOption);
         localStorage.submitQues=JSON.stringify(submitQues);
-        if(savedQuestionnaire.length !== cuursavedQlen){
-            savedQuestionnaire.pop();
-            localStorage.savedQuestionnaire=JSON.stringify(savedQuestionnaire);
-        }
-        window.location.href="17.01.01task50-index.html";
-
+        var savedIndex=Number(localStorage.savedIndex),
+            savedQuestionnaire=JSON.parse(localStorage.savedQuestionnaire);
+        savedQuestionnaire.splice(savedIndex,1);
+        localStorage.savedQuestionnaire=JSON.stringify(savedQuestionnaire);
+        window.location.href="../index.html";
     });
 });
 

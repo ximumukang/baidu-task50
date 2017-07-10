@@ -67,7 +67,7 @@ $(document).on("click","#confirm-btn",function () {
         }
     }
     localStorage.submitQues=JSON.stringify(submitQues);
-    window.location.href="17.01.01task50-index.html";
+    window.location.href="../index.html";
 });
 
 //弹出框点击取消

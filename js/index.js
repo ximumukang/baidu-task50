@@ -37,7 +37,7 @@ $(function () {
             currTime=new Date(aSubmitQues.date);
             if(currTime-(new Date())>0){
                 $("<td class='ing'></td>").text("发布中").appendTo($tr);
-                $("<td><button class='add-btn'><a href='17.01.11task50-fillQuestionnaire.html' submitIndex='"+thisIndex+"' class='finish-questionnaire'>填写问卷</a></button><button ><a submitIndex='"+thisIndex+"' class='view-data' href='17.01.14task50-viewData.html'>查看数据</a></button></td>").appendTo($tr);
+                $("<td><button class='add-btn'><a href='fillQuestionnaire.html' submitIndex='"+thisIndex+"' class='finish-questionnaire'>填写问卷</a></button><button ><a submitIndex='"+thisIndex+"' class='view-data' href='viewData.html'>查看数据</a></button></td>").appendTo($tr);
                 $(document).on("click",".finish-questionnaire",function () {
                     localStorage.submitIndex=$(this).attr("submitIndex");
                 });
@@ -46,7 +46,7 @@ $(function () {
                 });
             }else {
                 $("<td class='been'></td>").text("已结束").appendTo($tr);
-                $("<td><button class='delete-questionnaire' submitIndex='"+thisIndex+"'>删除问卷</button><button><a submitIndex='"+thisIndex+"' class='view-data' href='17.01.14task50-viewData.html'>查看数据</a></button></td>").appendTo($tr);
+                $("<td><button class='delete-questionnaire' submitIndex='"+thisIndex+"'>删除问卷</button><button><a submitIndex='"+thisIndex+"' class='view-data' href='viewData.html'>查看数据</a></button></td>").appendTo($tr);
             }
             $tr.appendTo($table);
         }
@@ -58,7 +58,7 @@ $(function () {
     //点击编辑保存的问卷
     $(document).on("click",".edit-saved",function () {
         localStorage.savedIndex=$(this).attr("savedIndex");
-        window.location.href="17.01.17task50-savedQuestionnaire.html";
+        window.location.href="savedQuestionnaire.html";
     });
 
     $(document).on("click","#cancel-btn",function () {
