@@ -4,8 +4,10 @@
 var submitQues=JSON.parse(localStorage.submitQues),
     aSubmitQues=submitQues[localStorage.submitIndex],
     optionLen=aSubmitQues.question.length;
+
+//渲染出问卷内容
 $("#creatTitle").text(aSubmitQues.title);
-for(var i=0;i<optionLen;i++){
+for(let i=0;i<optionLen;i++){
     var $div=$("<div class='question-option'></div>").addClass(aSubmitQues.type[i]);
     $div.append($("<h3></h3>").text(aSubmitQues.question[i]));
     if(aSubmitQues.answers[i].length==0){
@@ -23,28 +25,69 @@ $(document).on("click",".audio-question p",function () {
         .siblings().css("color","black").attr("answer","0");
 });
 $(document).on("click",".checkbox-question p",function () {
-    $(this).toggle(function () {
-        $(this).css("color","#ee7419").attr("answer","1");
-    },function () {
+    if($(this).attr("answer") == 1){
         $(this).css("color","black").attr("answer","0");
-    });
-    $(this).trigger("click");//如何没有这行代码，第一次点击不选中；
+    }else {
+        $(this).css("color","#ee7419").attr("answer","1");
+    }
 });
+//获取当前这个人的数据
+function getData(){
+    var  aPeopleData=[];
+    for(let i =0;i<optionLen; i++){
+        var questionOption=$(".question-option")[i],
+            aOption=[],
+            aOptionEle=questionOption.getElementsByTagName("p");
+        for(let f=0,len=aOptionEle.length;f<len;f++){
+            aOption.push(Number(aOptionEle[f].getAttribute("answer")));
+        }
+        if(aOption.length==0){
+            aOption.push(questionOption.getElementsByTagName("textarea")[0].value);
+        }
+        aPeopleData.push(aOption);
+    }
+    return aPeopleData;
+}
 
+function isFinish(data) {
+    for(let i=0,len=data.length;i<len;i++){
+        if(typeof data[i][0]=="number" && eval(data[i].join("+"))==0){
+            return false;
+        }else if(typeof data[i][0] !=="number" && data[i][0].length==0 ){
+            return false;
+        }
+    }
+    return true;
+}
 //点击提交问卷
 $("#submit-questionnaire").click(function () {
-    popup(getData());
-    //$("#submit-questionnaire").unbind();
+    var aPeopleData = getData();
+    console.log(aPeopleData)
+    if(isFinish(aPeopleData)){
+        new Modal({
+            title:"提示",
+            body:"确认提交问卷？",
+            noCancel:false,
+            confirmAim:"confirm-fill"
+        })
+    }else {
+        new Modal({
+            title:"提示",
+            body:"请完整填写问卷。",
+            noCancel:true,
+            confirmAim:"close-modal"
+        })
+    }
 });
 
 //弹出框符合要求点击确定后
-$(document).on("click","#confirm-btn",function () {
+$(document).on("click",".confirm-fill",function () {
     if(aSubmitQues.value.length==0){
         for(let i =0;i<optionLen; i++){
             var questionOption=$(".question-option")[i];
             var aOption=[],
                 aOptionEle=questionOption.getElementsByTagName("p");
-            for(var f=0;f<aOptionEle.length;f++){
+            for(let f=0,len=aOptionEle.length;f<len;f++){
                 aOption.push(Number(aOptionEle[f].getAttribute("answer")));
             }
             if(aOption.length==0){
@@ -67,52 +110,6 @@ $(document).on("click","#confirm-btn",function () {
         }
     }
     localStorage.submitQues=JSON.stringify(submitQues);
-    window.location.href="../index.html";
+    window.location.href="index.html";
 });
 
-//弹出框点击取消
-$(document).on("click","#cancel-btn",function () {
-    $(this).parents(".popup").remove();
-});
-$(document).on("click","#confirm-btn1",function () {
-    $(this).parents(".popup").remove();
-});
-
-//获取当前这个人的数据
-function getData(){
-    for(var i =0;i<optionLen; i++){
-        var questionOption=$(".question-option")[i];
-        var aOption=[],
-            aPeopleData=[],
-            aOptionEle=questionOption.getElementsByTagName("p");
-        for(var f=0;f<aOptionEle.length;f++){
-            aOption.push(Number(aOptionEle[f].getAttribute("answer")));
-        }
-        if(aOption.length==0){
-            aOption.push(questionOption.getElementsByTagName("textarea")[0].value);
-        }
-        aPeopleData.push(aOption);
-    }
-    return aPeopleData;
-}
-
-//弹出层
-function popup(data) {
-    var ifFinished=true;
-    $popupDiv=$("<div class='popup'><h1> &nbsp;&nbsp;提示<span id='close-popup'></span></h1><div><p id='popup-content'></p><div id='popup-btns'></div></div></div>");
-    $popupDiv.appendTo($("body"));
-    for(var i=0;i<data.length;i++){
-        if(typeof data[i][0]=="number" && eval(data[i].join("+"))==0){
-            ifFinished=false;
-        }else if(typeof data[i][0] !=="number" && data[i][0].length==0 ){
-            ifFinished=false;
-        }
-    }
-    if(ifFinished){
-        $popupDiv.find("#popup-content").text("确认提交问卷？");
-        $popupDiv.find("#popup-btns").append($("<button id='confirm-btn'>确定</button> &nbsp;&nbsp;<button id='cancel-btn'>取消</button>"));
-    }else{
-        $popupDiv.find("#popup-content").text("请完整填写问卷。");
-        $popupDiv.find("#popup-btns").append($("<button id='confirm-btn1'>确定</button>"));
-    }
-}

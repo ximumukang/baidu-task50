@@ -43,3 +43,9 @@
 .white{
     background-color: white;
 }
+.checkbox-question,.audio-question {
+    text-align: center;
+}
+.checkbox-question h3,.audio-question h3 {
+    text-align: left;
+}

@@ -1,0 +1,57 @@
+.modal-mask {
+    width: 100%;
+    height: 100%;
+    background-color: #7d807e;
+    opacity: .5;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.modal-dialog {
+    width: 240px;
+    height: 206px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.5);
+    position: fixed;
+    top:50%;
+    left: 50%;
+    margin-top: -103px;
+    margin-left: -120px;
+    background-color: white;
+    opacity: 1;
+    z-index: 3;
+}
+@media screen and (min-width: 789px ) {
+    .modal-dialog {
+        width: 400px;
+        margin-left: -200px;
+    }
+}
+.modal-header {
+    text-indent: 1em;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1.5em;
+    background-color: rgb(238, 238, 238);
+}
+.modal-body {
+    text-align: center;
+    line-height: 120px;
+}
+.modal-footer {
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+.modal-footer button {
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+}

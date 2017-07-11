@@ -1,7 +1,7 @@
 .date-picker {
-	width: 280px;
+	width: 210px;
 	border: 1px solid black;
-	border-radius: 10px;
+	border-radius: 5px;
 	box-shadow: 1px 1px 1px 1px rgba(0,0,0,.5);
 	background-color: white;
 	color: black;
@@ -20,9 +20,9 @@
 .date-picker .next,
 .date-picker li{
 	display: inline-block;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
 	font-size: 12px;
 	text-align: center;
 	box-sizing: border-box;
@@ -34,9 +34,9 @@
 .date-picker .next {
 	position: absolute;
 	top: 0;
-	font-size: 24px;
 	cursor: pointer;
 	color: black;
+	font-weight: bold;
 }
 .date-picker .prev:active,
 .date-picker .next:active {
